@@ -1,0 +1,59 @@
+﻿
+@using BsTest.Models
+@model IEnumerable<BsTest.Models.Album>
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+        function HeadBtn_Click(id) {
+
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("Detail", "Home")?id=" + id,
+                contentType: 'text/html; charset=utf-8',
+                success: function (response) {
+                    $('#album-photo-'+id).html(response);
+                }
+            });
+    }
+     function Comments_Click(id) {
+
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("Comments", "Home")?id=" + id,
+                contentType: 'text/html; charset=utf-8',
+                success: function (response) {
+                    $('#album-photo-comment'+id).html(response);
+                }
+            });
+    }
+</script>
+
+
+<div>
+    <table class="table">
+        @foreach (Album album in Model)
+        {
+            <tr>
+                <td> <input id="@album.Id" type="hidden" value="@album.Id"></td>
+            </tr>
+            <tr>
+                <td>@album.Title</td>
+                <td><input class="btn btn-sm btn-primary" type="button" value="Visualizar Álbum" onclick="HeadBtn_Click( document.getElementById(@album.Id).value)" /></td>
+
+            </tr>
+            <tr>
+                <td id="@string.Concat("album-photo-", album.Id)"></td>
+
+            </tr>
+            <tr>
+                <td id="@string.Concat("album-photo-comment", album.Id)"></td>
+            </tr>
+        }
+    </table>
+
+</div>
