@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<BsTest.Models.Comment>
 
+<h2>Comments</h2>
 @foreach (var comment in Model)
 {
-    <ul>
-        <li>@comment.Id</li>
-        <li>@comment.Name</li>
-        <li>@comment.Email</li>
-        <li>@comment.Body</li>
+    <ul class="list-group">
+        <li class="list-group-item">@comment.Id:  @comment.Name </li>
+        <li class="list-group-item"><strong>Email: </strong>@comment.Email</li>
+        <li class="list-group-item">@comment.Body</li>
     </ul>
 }

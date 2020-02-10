@@ -16,7 +16,7 @@
                 url: "@Url.Action("Detail", "Home")?id=" + id,
                 contentType: 'text/html; charset=utf-8',
                 success: function (response) {
-                    $('#album-photo-'+id).html(response);
+                    $('#album-photo').html(response);
                 }
             });
     }
@@ -27,33 +27,45 @@
                 url: "@Url.Action("Comments", "Home")?id=" + id,
                 contentType: 'text/html; charset=utf-8',
                 success: function (response) {
-                    $('#album-photo-comment'+id).html(response);
+                    $('#album-photo-comment').html(response);
                 }
             });
     }
 </script>
 
 
-<div>
-    <table class="table">
-        @foreach (Album album in Model)
-        {
-            <tr>
-                <td> <input id="@album.Id" type="hidden" value="@album.Id"></td>
-            </tr>
-            <tr>
-                <td>@album.Title</td>
-                <td><input class="btn btn-sm btn-primary" type="button" value="Visualizar Álbum" onclick="HeadBtn_Click( document.getElementById(@album.Id).value)" /></td>
+<div class="container-fluid">
+    <h1><strong>Albums</strong></h1>
+    <div class="row">
+        <div class="col-md-12">
+            <table class=" table-responsive">
 
-            </tr>
-            <tr>
-                <td id="@string.Concat("album-photo-", album.Id)"></td>
+                @foreach (Album album in Model)
+                {
+                    <tr>
+                        <td> <input id="@album.Id" type="hidden" value="@album.Id"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6"> @album.Id. @album.Title</div>
+                                <div class="col-md-6"><input class="btn  btn-default" type="button" value="Visualizar Álbum" onclick="HeadBtn_Click( document.getElementById(@album.Id).value)" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div id="album-photo">
+            </div>
+        </div>
 
-            </tr>
-            <tr>
-                <td id="@string.Concat("album-photo-comment", album.Id)"></td>
-            </tr>
-        }
-    </table>
-
+        <div class="col-md-4">
+            <div id="album-photo-comment">
+            </div>
+        </div>
+    </div>
 </div>

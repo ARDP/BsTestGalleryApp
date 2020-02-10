@@ -1,8 +1,13 @@
 ﻿@model IEnumerable<BsTest.Models.Photo>
 
-@foreach (var photo in Model)
-{
-
-    <img src="@photo.ThumbnailUrl" height="100" width="100" />
-    <input type="button" value="Ver comentarios" onclick="Comments_Click(@photo.Id)" />
-}
+<div class="row">
+    <h1>Photos</h1>
+    @foreach (var photo in Model)
+    {
+        <ul class="list-inline">
+            <li><img src="@photo.ThumbnailUrl" height="30" width="30" /></li>
+            <li>@photo.Title</li>
+            <li> <button type="button" class="btn btn-default btn-sm" onclick="Comments_Click(@photo.Id)">Ver comentarios</button></li>
+        </ul>
+    }
+</div>
